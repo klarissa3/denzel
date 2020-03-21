@@ -9,6 +9,7 @@ const {IMDB_NAME_URL, IMDB_URL, P_LIMIT} = require('./constants');
  * @param  {String}  actor - imdb id
  * @return {Array}
  */
+
 const getFilmography = async actor => {
   try {
     const response = await axios(`${IMDB_NAME_URL}/${actor}`);

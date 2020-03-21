@@ -3,11 +3,18 @@ const IMDB_TITLE_URL = 'https://www.imdb.com/title';
 const IMDB_URL = 'https://www.imdb.com';
 const P_LIMIT = 25;
 const PORT = '9292';
+const  url= "mongodb://localhost:27017/denzel";
+const  user= 'klarissa';
+const  pwd= 'password';
 
 module.exports = {
   IMDB_NAME_URL,
   IMDB_TITLE_URL,
   IMDB_URL,
   P_LIMIT,
-  PORT
+  PORT,
+  url,
+  user,
+  pwd
 };
+
