@@ -84,11 +84,16 @@ app.get('/movies/populate/:id', async (request, response) => {
 			return response.status(500).json(err);
 		return count;
 	});
-
 	response.status(200).json({ total: numMovies });
-
-
   });
+
+app.get('/movies', async (request, response) => {
+	const random = await Movie.aggregate([ { $match: { metascore: { $gte: 77 } } },{ $sample: { size: 1 } } ])
+	response.status(200).json(random);
+
+});
+
+
 
 app.listen(PORT);
 console.log(`📡 Running on port ${PORT}`);
