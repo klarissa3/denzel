@@ -93,6 +93,10 @@ app.get('/movies', async (request, response) => {
 
 });
 
+app.get('/movies/:id', async (request, response) => {
+	const specific = await Movie.aggregate([ { $match : {  id: request.params.id } } ]);
+	response.status(200).json(specific);
+});
 
 
 app.listen(PORT);
