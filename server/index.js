@@ -34,7 +34,9 @@ const movieSchema = Schema({
   	synopsis: String,
   	title: String,
   	votes: Number,
-  	year: Number
+	year: Number,
+	date: String,
+	review:String
 });
 
 var Movie = mongoose.model('Movie', movieSchema)
@@ -110,18 +112,13 @@ app.get('/movies/:id', async (request, response) => {
 	response.status(200).json(specific);
 });
 
-//app.get('/movies/search', async (request, response) => {
-	//let lim = 5, meta = 0, movie =[]
-	/*if (request.query.limit)
-		limit = Number(req.query.limit);
-	if (request.query.metascore)
-		meta = Number(req.query.metascore);
-	*/
-	//const tot = await Movie.find({ "metascore": 77}).count();
-	//response.ok;
-	//movie = await Movie.aggregate([ { $match : {  metascore: meta}},{ $sample: { size: lim } }, { $sort: { metascore: -1 } } ]);
-	//response.status(200).json({limit :lim , total : tot, result : movie} );
-//});
+app.post('/movies/:id', async (request, response) => {
+	const filter = { id: request.params.id }
+	const update = { date: request.body.date, review: request.body.review }
+	let movie = await Movie.findOneAndUpdate(filter,update, {new:true} );
+	response.status(200).json({ _id: movie._id });
+	
+	});
 
 app.listen(PORT);
 console.log(`📡 Running on port ${PORT}`);
