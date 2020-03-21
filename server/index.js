@@ -90,14 +90,38 @@ app.get('/movies/populate/:id', async (request, response) => {
 app.get('/movies', async (request, response) => {
 	const random = await Movie.aggregate([ { $match: { metascore: { $gte: 77 } } },{ $sample: { size: 1 } } ])
 	response.status(200).json(random);
+	
 
 });
 
 app.get('/movies/:id', async (request, response) => {
+	if (request.params.id === "search") {
+		let lim = 5, meta = 0;
+		if (request.query.limit)
+			lim = Number(request.query.limit);
+		
+		if (request.query.metascore)
+			meta = Number(request.query.metascore);
+		const tot = await Movie.countDocuments({ "metascore": meta});
+		movie = await Movie.aggregate([ { $match : {  metascore: meta}},{ $sample: { size: lim } }, { $sort: { metascore: -1 } } ]);
+		response.status(200).json({limit :lim , total : tot, result : movie} );
+	}
 	const specific = await Movie.aggregate([ { $match : {  id: request.params.id } } ]);
 	response.status(200).json(specific);
 });
 
+//app.get('/movies/search', async (request, response) => {
+	//let lim = 5, meta = 0, movie =[]
+	/*if (request.query.limit)
+		limit = Number(req.query.limit);
+	if (request.query.metascore)
+		meta = Number(req.query.metascore);
+	*/
+	//const tot = await Movie.find({ "metascore": 77}).count();
+	//response.ok;
+	//movie = await Movie.aggregate([ { $match : {  metascore: meta}},{ $sample: { size: lim } }, { $sort: { metascore: -1 } } ]);
+	//response.status(200).json({limit :lim , total : tot, result : movie} );
+//});
 
 app.listen(PORT);
 console.log(`📡 Running on port ${PORT}`);
