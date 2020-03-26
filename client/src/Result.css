@@ -1,0 +1,46 @@
+.results-page {
+    padding: 20px;
+  }
+  .title {
+    margin: 0px;
+    font-style: bold;
+  }
+
+  img {
+    border-radius: 3px 5px 0 0;
+    border: 1px solid rgb(7, 6, 6);
+    width: 200px;
+  }
+
+ .column {
+     float: left;
+ }
+
+ .btn.btn-primary{
+    color: rgba(255, 255, 255, 0.315);
+    font-style: italic;
+ }
+
+h1 {
+    position: absolute;
+    top: 0px;
+    left:35%;  
+ }
+
+ .column1{
+    position: absolute;
+    width: 40%;
+    height:45%;
+    left: 20%;
+  
+ }
+ a{
+   padding: 7px;
+ }
+
+ a.syn{
+   font-style: italic;
+ }
+ .synopsis{
+   padding-bottom: 3%;
+ }

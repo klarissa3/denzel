@@ -7,6 +7,7 @@ const imdb = require('./imdb.js');
 const Schema = mongoose.Schema;
 
 const app = express();
+module.exports = app;
 
 mongoose.Promise = global.Promise;
 mongoose.connect(url, {
@@ -21,7 +22,7 @@ mongoose.connect(url, {
     process.exit();
 });
 
-module.exports = app;
+
 
 const movieSchema = Schema({
   
@@ -40,6 +41,7 @@ const movieSchema = Schema({
 });
 
 var Movie = mongoose.model('Movie', movieSchema)
+module.exports = Movie;
 
 app.use(require('body-parser').json());
 app.use(cors());
